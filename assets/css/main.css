@@ -2402,17 +2402,20 @@ input, select, textarea {
 			}
 
 			ul.feature-icons li:before {
-				background: #4acaa8;
-				border-radius: 100%;
-				color: #ffffff;
+				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 512 512'%3E%3Cpath d='M256,0l221.7,128v256L256,512L34.3,384V128L256,0z' fill='rgba(144, 144, 144, 0.1)' /%3E%3C/svg%3E");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
+				color: #000000;
 				display: block;
-				height: 2.5em;
+				font-size: 1.25rem;
+				height: 3.25rem;
 				left: 0;
-				line-height: 2.5em;
+				line-height: 3.25rem;
 				position: absolute;
 				text-align: center;
 				top: 0;
-				width: 2.5em;
+				width: 3.25rem;
 			}
 
 /* Icons */
