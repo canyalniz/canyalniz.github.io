@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Can YALNIZ" name="author" />
+    <meta
+      content="LangChain, AI, ChatGPT, gpt-3.5-turbo, OpenAI, Eleven Labs, Whisper, SpeechRecognition, Python, programming, Machine Learning, ConversationSummaryBufferMemory, "
+      name="keywords"
+    />
+    <meta
+      content="How I introduced my friend to her favorite movie character by chaining together AI models with LangChain"
+      name="description"
+    />
+    <meta
+      content="Creating Real Conversations with Fictional Characters"
+      property="og:title"
+    />
+    <meta content="article" property="og:type" />
+    <meta
+      content="https://cannect.canyalniz.com/001-gift-of-conversation.html"
+      property="og:url"
+    />
+    <meta
+      content="https://i.ibb.co/pfSpkrB/birthday-robot-small.webp"
+      property="og:image"
+    />
+    <meta content="Cannect" property="og:site_name" />
+    <title>
+      Cannect | Creating Real Conversations with Fictional Characters
+    </title>
+    <link href="assets/css/init.css" rel="stylesheet" />
+    <link href="assets/css/nav.css" rel="stylesheet" />
+    <link href="assets/css/article.css" rel="stylesheet" />
+    <link href="assets/css/footer.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+      rel="stylesheet"
+    />
+    <!--<link rel="stylesheet" href="debug.css" />-->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="assets/icons8-brain-material-sharp-96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/icons8-brain-material-sharp-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons8-brain-material-sharp-16.png"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <script src="assets/js/mobile-share.js"></script>
+  </head>
+  <body>
+    <div class="logo-mobile">
+      <a href="index.html">Cannect</a>
+    </div>
+    <nav>
+      <div class="logo-desktop">
+        <a href="index.html">Cannect</a>
+      </div>
+      <div class="desktop-nav-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <div class="menu-wrapper">
+      <input class="toggler" type="checkbox" />
+      <div class="hamburger"><div></div></div>
+      <nav class="mobile-nav-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+    <div class="wrapper">
+      <div class="mobile-share">
+        <a
+          class="minion hidden"
+          href="#"
+          style="background: #3b5998; transition: opacity 0.3s ease-in"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+        <a
+          class="minion hidden"
+          href="#"
+          style="background: #00acee; transition: opacity 0.2s ease-in"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a
+          class="minion hidden"
+          href="#"
+          style="background: #0e76a8; transition: opacity 0.1s ease-in"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a class="commander" href="javascript:;" id="commander-id"
+          ><i class="fa fa-share"></i
+        ></a>
+      </div>
+      <article>
+        <h1 id="creating-real-conversations-with-fictional-characters">
+          Creating Real Conversations with Fictional Characters
+        </h1>
+        <div class="metadata">
+          <i class="fa fa-calendar"></i>
+          <p class="date">30 Aug 2023</p>
+          <i class="fas fa-book-reader"></i>
+          <p class="duration">10 min read</p>
+        </div>
+        <p class="subtitle">
+          How I introduced my friend to her favorite movie character by
+          chaining together AI models with LangChain
+        </p>
+        <img
+          class="banner"
+          src="https://i.ibb.co/x28VQkd/birthday-robot.webp"
+        />
+        <div class="table-of-contents">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#system-overview">System Overview</a></li>
+            <li><a href="#api-keys--cost">API Keys &amp; Cost</a></li>
+            <li><a href="#python-environment">Python Environment</a></li>
+            <li>
+              <a href="#setting-api-keys-with-environment-variables"
+                >Setting API Keys with Environment Variables</a
+              >
+            </li>
+            <li><a href="#voice-input">Voice Input</a></li>
+            <li>
+              <a href="#the-heart-soul-and-brain-of-the-character"
+                >The Heart, Soul and Brain of the Character</a
+              >
+            </li>
+            <li>
+              <a href="#giving-your-character-a-voice"
+                >Giving Your Character a Voice</a
+              >
+            </li>
+            <li><a href="#the-conversation-loop">The Conversation Loop</a></li>
+            <li><a href="#stress-points">Stress Points</a></li>
+            <li><a href="#finishing-touches">Finishing Touches</a></li>
+            <li>
+              <a href="#moderating-the-conversation"
+                >Moderating the Conversation</a
+              >
+            </li>
+            <li><a href="#appendix">Appendix</a></li>
+          </ul>
+        </div>
+        <div class="desktop-frame">
+          <a class="btn" href="#" target="_blank">
+            <i class="fab fa-facebook-f" style="color: #3b5998"></i>
+          </a>
+          <a class="btn" href="#" target="_blank">
+            <i class="fab fa-twitter" style="color: #00acee"></i>
+          </a>
+          <a class="btn" href="#" target="_blank">
+            <i class="fab fa-linkedin-in" style="color: #0e76a8"></i>
+          </a>
+        </div>
+        <h2 id="introduction">Introduction</h2>
+        <p>
+          My friend Çağla is a die hard fan of the movie Legally Blonde and
+          an avid admirer of the movie's heroine Elle Woods. Elle's indomitable
+          spirit, loyalty to her friends and high held moral values are among
+          the reasons Çağla cherishes her so much. So, I thought I would use my
+          programming skills and the capabilities of today's artificial
+          intelligence models to facilitate a meeting between them. In this blog
+          post, I will walk you through the process of creating such a birthday
+          gift. I'll share the challenges you may face, the AI models I
+          employed, points that still need some work and how you can make this
+          gift your own.
+        </p>
+        <p>
+          You can find all of the code referenced in this post at the
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/canyalniz/Cannect"
+            >GitHub repository of this project</a
+          >.
+        </p>
+        <h2 id="system-overview">System Overview</h2>
+        <p>
+          Below is a diagram of the system as a whole. Each turn in the
+          conversation between the user and the virtual character starts with
+          the user's vocal input. The vocal input is turned to text and
+          processed by a conversation chain powered by an llm. The llm then
+          generates a text response to what was said according to the assigned
+          character and given context, which is then used to generate an audio
+          response to be played to the user.
+        </p>
+        <img
+          class="size-3"
+          src="https://i.ibb.co/zG3H520/conversation-flow-transparent-cropped.png"
+        />
+        <h2 id="api-keys--cost">API Keys &amp; Cost</h2>
+        <p>
+          At three points during the computer's turn in the conversation I chose
+          to outsource the computation. The speech-to-text conversion and the
+          llm workload of the conversation chain is handled by OpenAI API calls
+          (Whisper and ChatGPT-3.5-turbo respectively). Text-to-speech
+          generation is done using the ElevenLabs API. If you have the hardware
+          to run open source alternatives of these models feel free to swap out
+          parts of the pipeline as necessary.
+        </p>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://openai.com/pricing"
+              >OpenAI API pricing</a
+            >: billed according to usage as of the writing of this post, quite
+            reasonably priced
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://elevenlabs.io/pricing"
+              >ElevenLabs API pricing</a
+            >: subscription based, I personally recommend the Starter plan with
+            the first month only $1 as of the writing of this post
+          </li>
+        </ul>
+        <h2 id="python-environment">Python Environment</h2>
+        <p>
+          Let's start with setting up our Python environment and installing our
+          dependencies. Create a new Python virtual environment with your
+          preferred method and install the dependencies using the
+          <code>requirements.txt</code> file that can be found in the
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/canyalniz/Cannect"
+            >GitHub repository of this project</a
+          >. I recommend using
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.python.org/3/library/venv.html"
+            >venv</a
+          >
+          if you're on Linux or macOS and
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.conda.io/en/latest/"
+            >Conda</a
+          >
+          if you're on Windows.
+        </p>
+        <h2 id="setting-api-keys-with-environment-variables">
+          Setting API Keys with Environment Variables
+        </h2>
+        <p>
+          In order to authenticate ourselves during the API calls we'll need to
+          provide our program with our keys. The LangChain OpenAI API module
+          expects to find the API key in its dedicated environment variable
+          while the SpeechRecognition Whisper API module and the ElevenLabs API
+          module expect their respective keys as function arguments. To suit all
+          needs and prevent possible leakage of the keys, I recommend setting
+          the environment variables for both keys using your preferred method.
+          You can load the keys to variables within the program.
+        </p>
+        <pre><code class="language-python">import os
+</code></pre>
+        <pre><code class="language-python">OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") # Your OpenAI API Key goes here
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY") # Your Eleven Labs API Key goes here
+</code></pre>
+        <h2 id="voice-input">Voice Input</h2>
+        <p>
+          We'll use the
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/Uberi/speech_recognition#readme"
+            >SpeechRecognition</a
+          >
+          library for capturing the user's voice and converting it to text.
+          Every turn the program will start recording audio when the user starts
+          speaking and record until they stop speaking. Once the recording is
+          done the audio file will be sent to Whisper to be converted into text.
+        </p>
+        <p>
+          We'll start by initializing our recognizer object which we will use to
+          both capture the audio and make the API call to Whisper.
+        </p>
+        <pre><code class="language-python">import speech_recognition as sr
+</code></pre>
+        <pre><code class="language-python"># obtain audio from the microphone
+r = sr.Recognizer()
+</code></pre>
+        <p>
+          Our <code>Recognizer</code> object uses its
+          <code>energy_threshold</code> to detect speech over normal background
+          noise so that it can start recording. Let's configure it automatically
+          for our environment. The below code should work well for the majority,
+          however if you have issues with the energy threshold after automatic
+          calibration check out the
+          <a
+            href="#manual-configuration-of-the-speechrecognition-energy-threshold"
+            >section</a
+          >
+          in the appendix for manual configuration.
+        </p>
+        <pre><code class="language-Python">with sr.Microphone() as source: # use the default microphone as the audio source
+    r.adjust_for_ambient_noise(source, duration=5) # listen for 5 seconds to calibrate the energy threshold for ambient noise levels
+</code></pre>
+        <p>
+          Once the energy threshold is set to the appropriate value, the
+          <code>Recognizer</code> can start recording when it detects speech.
+          Let's listen for some input and store the recording in a variable.
+        </p>
+        <pre><code class="language-Python">with sr.Microphone() as source:
+    audio = r.listen(source)
+    print("Captured next line...")
+</code></pre>
+        <p>
+          Once the audio is captured, we can convert it to text using the
+          Whisper API.
+        </p>
+        <pre><code class="language-Python">input_text = r.recognize_whisper_api(audio, api_key=OPENAI_API_KEY)
+</code></pre>
+        <h2 id="the-heart-soul-and-brain-of-the-character">
+          The Heart, Soul and Brain of the Character
+        </h2>
+        <p>
+          Now that we have the user's input, we will process it and generate a
+          response as our character within the given context, while also paying
+          attention to the history of the conversation. We'll achieve this using
+          the <code>ConversationChain</code> class from the
+          <code>LangChain</code> Python library.
+          <code>ConversationClass</code> will abstract away a lot of details for
+          us to be able to focus on building the character and the story without
+          worrying about the lower level details of prompting the LLM
+          iteratively or manually handling the history of the conversation.
+        </p>
+        <h3 id="the-llm">the LLM</h3>
+        <p>
+          We use the <code>ChatOpenAI</code> module offered by LangChain to
+          initialize our llm. We need to take care of two things when setting up
+          our OpenAI llm what model to use and the temperature of the model. For
+          this application, among the currently available models,
+          <code>gpt-3.5-turbo</code> is the tool for the job. It has the
+          dialogue operation capabilities we're looking for and it is very
+          reasonably priced. As of the writing of this post
+          <code>gpt-3.5-turbo</code> is the default model
+          <code>ChatOpenAI</code> uses. As for the temperature, setting it to
+          0.7 yielded good results for my use case, feel free to try out
+          different values yourself.
+        </p>
+        <pre><code class="language-python">from langchain.chat_models import ChatOpenAI
+</code></pre>
+        <pre><code class="language-python">llm = ChatOpenAI(temperature=0.7)
+</code></pre>
+        <h3 id="creating-the-character-within-the-context-of-the-prompt">
+          Creating the Character Within the Context of the Prompt
+        </h3>
+        <p>
+          We'll utilize ChatGPT for creating the character and equipping it with
+          context awareness. We'll weave the details about the character and
+          initial context together in a single prompt. It is best to keep this
+          prompt as short as possible but not shorter, since we will be adding
+          on to this prompt as the conversation progresses. Crafting the prompt
+          is as much an artistic process as it is analytical, so there is not a
+          single best way of doing it. Here is the prompt I wrote for this
+          occasion. Since the response audio will be generated using an English
+          speaking model, I swap out my friend's name Çağla with
+          <code>Chaala</code>. Which, when spoken by the model, closely
+          resembles how it is actually pronounced.
+        </p>
+        <pre
+          class="wrapping"
+        ><code class="language-markdown">The following is a friendly phone call between the character Elle Woods from the movie Legally Blonde and her best friend Chaala.
+Elle is compassionate, caring, supportive, talkative and empathetic.
+Chaala is on a journey to find herself, Elle will support her and encourage Chaala to believe in herself.
+Today is Chaala's birthday.
+Elle wants to learn more about Chaala's life and catch-up.
+Elle pays attention to details from the context of the conversation and accurately represents her character from Legally Blonde.
+</code></pre>
+        <p>
+          Note: Luckily for me ChatGPT knows about the movie Legally Blonde and
+          is familiar with Elle Woods so I can reference her directly. However
+          you will need to give characteristic details and background
+          information to ChatGPT in the rare case ChatGPT does not know about
+          your chosen character and you need to build them from scratch.
+        </p>
+        <h3 id="custom-prompt-template-for-the-conversationchain">
+          Custom Prompt Template for the ConversationChain
+        </h3>
+        <p>
+          With the core of the prompt ready, we will create a custom prompt
+          template with which our ConversationChain object will be able to drive
+          the conversation. We want our prompt template to accept two input
+          variables: <code>history</code> to keep track of the conversation so
+          far and <code>input</code> to inject the user's input into the prompt.
+          We position the input variables in curly braces inside our prompt
+          template, and set the template up to end on <code>Elle:</code> to have
+          our llm generate the next line as Elle.
+        </p>
+        <pre><code class="language-python">from langchain import PromptTemplate
+</code></pre>
+        <pre><code class="language-python">conversation_prompt_template = PromptTemplate(
+    input_variables=['history', 'input'],
+    output_parser=None,
+    partial_variables={},
+    template="""\
+    The following is a friendly phone call between the character Elle Woods from the movie Legally Blonde and her best friend Chaala.\
+    Elle is compassionate, caring, supportive, talkative and empathetic.\
+    Chaala is on a journey to find herself, Elle will support her and encourage Chaala to believe in herself.\
+    Today is Chaala's birthday.\
+    Elle wants to learn more about Chaala's life and catch-up.\
+    Elle pays attention to details from the context of the conversation and accurately represents her character from Legally Blonde.\
+    
+
+    
+    Current conversation:
+    {history}
+    Chaala: {input}
+    Elle:""",
+    template_format='f-string',
+    validate_template=True)
+</code></pre>
+        <h3 id="conversation-memory">Conversation Memory</h3>
+        <p>
+          To generate the response and drive a meaningful conversation, the llm
+          must have an idea of what has been talked about up to the current
+          line. We can convey this information to our llm using one of the
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://python.langchain.com/docs/modules/memory/types/"
+            >many memory modules offered by LangChain</a
+          >. Our most notable options are:
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://python.langchain.com/docs/modules/memory/types/buffer"
+              >ConversationBufferWindowMemory</a
+            >: Retains the last <code>k</code> turns of the conversation
+            verbatim, where <code>k</code> is the window size
+          </li>
+          <li>
+            <a
+              href="https://python.langchain.com/docs/modules/memory/types/summary"
+              >ConversationSummaryMemory</a
+            >: At each turn performs a call to the llm using a custom prompt to
+            keep a running summary of the conversation history
+          </li>
+          <li>
+            <a
+              href="https://python.langchain.com/docs/modules/memory/types/summary_buffer"
+              >ConversationSummaryBufferMemory</a
+            >: Keeps the most recent turns of the conversation verbatim and
+            progressively summarizes older lines that fall above a token limit
+          </li>
+        </ul>
+        <p>
+          We will be using the
+          <code>ConversationSummaryBufferMemory</code> module which in my
+          opinion strikes a good balance regarding information retention without
+          getting too complicated. To utilize the summary feature offered by
+          this module we need a slight modification. The default progressive
+          summarization prompt refers to the user as <code>the human</code> and
+          the character as <code>the AI</code>. Let's create a custom
+          PromptTemplate by referencing the participants appropriately, the user
+          as <code>Chaala</code> and the character as <code>Elle</code>.
+        </p>
+        <pre><code class="language-python">summarizer_prompt_template = PromptTemplate(
+    input_variables=['summary', 'new_lines'],
+    output_parser=None,
+    partial_variables={},
+    template='Progressively summarize the lines of conversation provided, adding onto the previous summary returning a new summary.\n\nEXAMPLE\nCurrent summary:\nChaala asks what Elle thinks of artificial intelligence. Elle thinks artificial intelligence is a force for good.\n\nNew lines of conversation:\nChaala Why do you think artificial intelligence is a force for good?\nElle: Because artificial intelligence will help humans reach their full potential.\n\nNew summary:\nChaala asks what Elle thinks of artificial intelligence. Elle thinks artificial intelligence is a force for good because it will help humans reach their full potential.\nEND OF EXAMPLE\n\nCurrent summary:\n{summary}\n\nNew lines of conversation:\n{new_lines}\n\nNew summary:',
+    template_format='f-string',
+    validate_template=True)
+</code></pre>
+        <p>
+          Let's set the maximum token limit above which summarization will occur
+          to be 350 tokens and initialize our memory object.
+        </p>
+        <pre><code class="language-python">from langchain.memory import ConversationSummaryBufferMemory
+</code></pre>
+        <pre><code class="language-python">memory = ConversationSummaryBufferMemory(
+    llm=llm,
+    max_token_limit=350,
+    prompt=summarizer_prompt_template,
+    ai_prefix="Elle",
+    human_prefix="Chaala")
+</code></pre>
+        <h3 id="initializing-the-conversationchain">
+          Initializing the ConversationChain
+        </h3>
+        <p>
+          We can now use the parts we have built to create our ConversationChain
+        </p>
+        <pre><code class="language-python">from langchain.chains import ConversationChain
+</code></pre>
+        <pre><code class="language-python">conversation = ConversationChain(
+    llm=llm,
+    prompt = conversation_prompt_template,
+    memory=memory
+)
+</code></pre>
+        <p>and generate responses with</p>
+        <pre><code class="language-python">response_text = conversation.predict(input=input_text)
+</code></pre>
+        <h2 id="giving-your-character-a-voice">
+          Giving Your Character a Voice
+        </h2>
+        <h3 id="voice-cloning">Voice Cloning</h3>
+        <p>
+          You can check out
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://elevenlabs.io/"
+            >ElevenLabs</a
+          >
+          for a speech synthesis interface which you can use to capture the
+          voice of the character you have chosen. You are going to need some
+          high quality clips of your character speaking for the best results.
+        </p>
+        <h3 id="speech-generation">Speech Generation</h3>
+        <p>
+          Once we have the voice designed to our liking, we can make the API
+          call to have it read for us. To start we need to create identifiers
+          for the voice we have created and the model we wish to use for
+          generation. I was given access to the Eleven English v2 model from
+          ElevenLabs upon request. Although this model is in Beta as of the
+          writing of this post it produced better results for me. Make sure to
+          refer to your voice with the name you gave it on the ElevenLabs
+          platform.
+        </p>
+        <pre><code class="language-python">from elevenlabs import set_api_key
+from elevenlabs.api import Models
+from elevenlabs.api import Voices
+from elevenlabs import generate, stream
+</code></pre>
+        <pre><code class="language-python">set_api_key(ELEVENLABS_API_KEY)
+
+models = Models.from_api()
+elle_model = [model for model in models if model.name == "Eleven English v2"][0]
+
+voices = Voices.from_api()
+elle_voice = [voice for voice in voices if voice.name == "Elle Woods"][0]
+</code></pre>
+        <p>
+          For generating speech, we utilize the streaming option to reduce
+          latency and stay under the character limit.
+        </p>
+        <pre><code class="language-python">audio_stream = generate(
+    text=response_text,
+    voice=elle_voice,
+    model=elle_model,
+    stream=True
+)
+
+stream(audio_stream)
+</code></pre>
+        <h2 id="the-conversation-loop">The Conversation Loop</h2>
+        <p>
+          We are now ready to put everything together. Since our conversation
+          will consist of the user and the character taking turns to speak,
+          we'll wrap the whole thing in a loop and have it run until
+          interruption. We can also wrap the loop with a try-except block to
+          pickle the conversation memory before exiting the execution.
+        </p>
+        <pre><code class="language-python">try:
+    while True:
+        # capture spoken user input
+        with sr.Microphone() as source:
+            audio = r.listen(source)
+            print("Captured next line...")
+
+        # convert the user input into text
+        input_text = r.recognize_whisper_api(audio, api_key=OPENAI_API_KEY)
+        
+        # generate text response to the user input
+        response_text = conversation.predict(input=input_text)
+
+        # generate and stream the character's voice
+        audio_stream = generate(
+            text=response_text,
+            voice=elle_voice,
+            model=elle_model,
+            stream=True
+        )
+        stream(audio_stream)
+        
+except KeyboardInterrupt:
+    # save the conversation memory to disk
+    with open("conversation_memory", "wb") as f:
+        pickle.dump(conversation.memory, f)
+</code></pre>
+        <p>
+          With all our components working together, this chain of artificial
+          intelligence models will imitate a conversation with the chosen
+          character.
+        </p>
+        <h2 id="stress-points">Stress Points</h2>
+        <p>
+          As you will see upon testing it out yourself, for the most part this
+          system works pretty well. <strong>SpeechRecognition</strong> knows
+          where to start and stop the recording, <strong>Whisper</strong> is
+          quite successful in discerning what is said,
+          <strong>ChatGPT</strong> generates theme-appropriate responses, and
+          <strong>ElevenLabs English v2</strong> does a good job of generating
+          convincing speech. However there are points in the system that require
+          special attention and one caveat I haven't been able to mitigate.
+        </p>
+        <ul>
+          <li>
+            <strong>SpeechRecognition Configuration</strong>: Timing the
+            recording successfully requires the correct configuration of the
+            <code>Energy Threshold</code> and
+            <code>Pause Threshold</code> parameters. If the automatic
+            configuration isn't working out for you check out the
+            <a
+              href="#manual-configuration-of-the-speechrecognition-energy-threshold"
+              >manual configuration guides in the appendix</a
+            >.
+          </li>
+          <li>
+            <strong>ElevenLabs Voice Lab</strong>: Getting the voice design
+            right requires high quality of the character speaking as well as a
+            certain amount of experimentation.
+          </li>
+          <li>
+            <strong>Response Latency</strong>: Unfortunately there is one aspect
+            of the use experience I haven't been able to fix yet: the latency of
+            the spoken response. The biggest culprit here is the ElevenLabs API
+            call. Even with streaming enabled, the speech generation takes a
+            long time to complete. Paired with the
+            <code>PauseThreshold</code> amount of seconds
+            <code>SpeechRecognition</code> waits before concluding its
+            recording, you can expect to experience anywhere from 10 to 20
+            seconds of total response latency. Although this is quite high for
+            normal conversations, the <em>inter-dimensional</em> nature of the
+            conversation made it acceptable in my experience. If you have
+            powerful enough hardware you can attempt to get around this problem
+            by opting to run a tts model locally (such as
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/neonbjb/tortoise-tts"
+              >tortoise-tts</a
+            >).
+          </li>
+        </ul>
+        <h2 id="finishing-touches">Finishing Touches</h2>
+        <p>
+          The basic user experience is ready, but we can take it even further by
+          preparing a prelude and an epilogue for our phone call.
+        </p>
+        <h3 id="prelude">Prelude</h3>
+        <p>
+          Since this is likely to be a surprise birthday gift, let's include an
+          introduction to the conversation. For my gift I had one of the default
+          voices of ElevenLabs read the following text.
+        </p>
+        <pre
+          class="wrapping"
+        ><code class="language-markdown">Initiating contact with Elle Woods. This is an inter-dimensional phone call. Voice delays and awkward pauses are expected. Connecting now...
+</code></pre>
+        <p>
+          And followed this introduction with a
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.youtube.com/watch?v=nHRVQKY1xh4"
+            >phone line sound effect</a
+          >
+          that eventually gets picked up. Upon picking up the phone a
+          pre-generated audio of the character saying
+          <code>Hello Chaala!</code> is played. I chose to play the files using
+          mpv.
+        </p>
+        <pre><code class="language-python"># introduction
+os.system("mpv initiating-2.mp3")
+# phone line
+os.system("mpv --volume=65 ring.opus")
+# character greeting
+os.system("mpv elle-greeting.mp3")
+</code></pre>
+        <h3 id="epilogue">Epilogue</h3>
+        <p>
+          Finally, let's have the program play a
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.youtube.com/watch?v=kLLTQIagaLk"
+            >disconnection sound effect</a
+          >
+          when the conversation ends. In the
+          <a href="#the-conversation-loop">conversation loop</a> modify the
+          except block like so:
+        </p>
+        <pre><code class="language-python">except KeyboardInterrupt:
+    # play disconnection effect
+    os.system("mpv end.opus")
+    # save the conversation memory to disk
+    with open("conversation_memory", "wb") as f:
+        pickle.dump(conversation.memory, f)
+</code></pre>
+        <h2 id="moderating-the-conversation">Moderating the Conversation</h2>
+        <p>
+          You are now ready to give the gift of inter-dimensional conversation.
+          Let me tell you how I moderated the call. To preserve the mystery
+          around what was about to happen I had Çağla sit across from me so that
+          she couldn't see the screen. Gave her the headphones and went through
+          the
+          <a
+            href="#manual-configuration-of-the-speechrecognition-energy-threshold"
+            >Manual Configuration of the SpeechRecognition Energy Threshold</a
+          >. Once I was happy with the configuration, I executed
+          <a href="#prelude">the prelude</a> together with
+          <a href="#the-conversation-loop">the conversation loop</a> so that
+          recording started as soon as Elle greeted Çağla. When the conversation
+          was over, I interrupted the execution of the program to start
+          <a href="#epilogue">the epilogue</a> and save the conversation memory
+          to disk. I also recommend setting up a camera to record a video of the
+          conversation, the reaction I got made the effort of putting this
+          together well worth it.
+        </p>
+        <h2 id="appendix">Appendix</h2>
+        <h3 id="manual-configuration-of-the-speechrecognition-energy-threshold">
+          Manual Configuration of the SpeechRecognition Energy Threshold
+        </h3>
+        <p>
+          Unfortunately the automatic calibration of the
+          <code>energy_threshold</code> of <code>SpeechRecognition</code> isn't
+          going to cut it for all cases. Depending on your microphone
+          configuration and environment noise levels you may need to step in and
+          manually determine this value yourself. You can do this by disabling
+          the dynamic energy threshold property and experimenting with different
+          values. I recommend trying out different values yourself to get a feel
+          of the range of appropriate values. You can then perform a sound-check
+          before initiating the conversation to fine-tune the threshold.
+        </p>
+        <pre><code class="language-python">r.dynamic_energy_threshold = False
+r.energy_threshold = 1300
+
+with sr.Microphone() as source:
+    audio = r.listen(source)
+    print("Captured next line...")
+</code></pre>
+        <h3 id="customizing-the-pause-threshold-of-the-recognizer">
+          Customizing the Pause Threshold of the Recognizer
+        </h3>
+        <p>
+          If you find <code>SpeechRecognizer</code> stops listening as the user
+          is talking due to a long pause in their speech you can tell it how
+          long to wait by modifying the <code>pause_threshold</code>.
+        </p>
+        <pre><code class="language-Python">r.pause_threshold = 2
+</code></pre>
+        <h3 id="alsa-microphone-errors-linux-users">
+          ALSA Microphone Errors (Linux Users)
+        </h3>
+        <p>
+          On some Linux systems running ALSA, the
+          <code>SpeechRecognition</code> microphone interface can produce
+          warnings. In my experience these warnings can be ignored and the
+          system will keep working just fine. However, these warnings can
+          clutter up the output and make it difficult to follow any text
+          feedback from the program you may have put in to monitor the status of
+          the conversation. If you will be running this program in Jupyter
+          Notebooks/Lab, you can use the
+          <code>clear_output(wait=False)</code> call to clear the output right
+          after it is generated.
+        </p>
+        <pre><code class="language-python">with sr.Microphone() as source:
+    clear_output(wait=False)
+    audio = r.listen(source)
+    print("Captured next line...")
+</code></pre>
+      </article>
+      <div class="basic-footer">
+        <footer>
+          <div class="social">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/canyalniz"
+              ><i class="icon ion-social-github"></i></a
+            ><a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/canyalniz/"
+              ><i class="icon ion-social-linkedin"></i></a
+            ><a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="mailto:canyalniz97@gmail.com"
+              ><i class="icon ion-email"></i
+            ></a>
+          </div>
+          <p class="copyright">
+            Copyright © Can Yalnız, 2023 &nbsp; • &nbsp;
+            <a
+              class="copyright-link"
+              target="_blank"
+              href="https://icons8.com/icon/86832/brain"
+              >Favicon</a
+            >
+          </p>
+        </footer>
+      </div>
+    </div>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/night-owl.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.message-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 45px [start] 135px 540px 135px [end] 45px 1fr;
+    padding-top: calc(16px + 28vh);
+    font-family: 'Open Sans', sans-serif;
+    font: 400 19px "Open Sans";
+}
+
+.message-wrapper * { grid-column: start/end;}
+
+@media (max-width: 900px) {
+   .message-wrapper {grid-template-columns: 1fr 7.5% [start] 85% [end] 7.5% 1fr; font-size: 15px; padding-top: calc(16px + 18vh);}
+}
+
+.message-wrapper p { font: 400 19px/1.5 "Open Sans"; word-wrap:break-word; color: rgba(41, 41, 41, 1); padding-bottom: 2rem; cursor: default; text-align: center;}

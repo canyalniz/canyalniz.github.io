@@ -1,0 +1,101 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.social {
+    color:#4b4c4d;
+  text-align:center;
+  padding-bottom:25px;
+  padding-top: 25vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr 1fr
+}
+
+.social-card {
+    height: 40vh;
+    position: relative;
+    border-radius: 12px;
+    background-color: white;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all .1s ease-in;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+#social-card-1{ grid-column: 2/3;}
+#social-card-2{ grid-column: 3/4;}
+#social-card-3{ grid-column: 4/5;}
+
+.social-card a {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.social-card  i {
+  font-size:50px;
+  width:88px;
+  height:88px;
+  line-height:88px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  /*border:1px solid #ccc;*/
+  padding-top: 6vh;
+  margin:0 5vw;
+  color: inherit;
+  opacity: .75;
+}
+
+.social-card  span {
+    font: 700 19px "Noto Sans JP";
+    padding-top: 12vh;
+}
+
+#social-card-1:hover i {
+    color: #24292e;
+    opacity: 1;
+}
+#social-card-2:hover i {
+    color: #0077b5;
+    opacity: 1;
+}
+#social-card-3:hover i {
+    color: #caccce;
+    opacity: 1;
+}
+
+.social-card:hover {
+  top: -2px;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 640px) {
+    .social{
+        grid-template-columns: 5% 90% 5%;
+        padding-top: 10vh;
+    }
+    #social-card-1, #social-card-2, #social-card-3 { grid-column: 2/3 }
+    .social-card {
+        height: 10vh;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 2vh 0;
+    }
+    .social-card span {
+        padding: 0;
+        margin: 0;
+        margin-left: 15px;
+    }
+    .social-card i {
+        padding: 0;
+        margin: 0;
+    }
+}
